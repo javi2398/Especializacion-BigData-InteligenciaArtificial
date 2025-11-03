@@ -85,9 +85,18 @@ def main():
     array_valores[-1].append(acumulador_total)
 
 
-    print(array_valores)
+    # print(array_valores)
 
 # 6. Haz el ejercicio anterior usando numpy y aprovechando sus ventajas.
+
+    array_valores_numpy = np.random.randint(100, 999, (4, 5))
+
+    suma_total = array_valores_numpy.sum()
+
+    # Añadir columna de sumas de filas
+    array_valores_numpy = np.hstack((array_valores_numpy, array_valores_numpy.sum(axis=1).reshape(-1, 1)))
+
+    print(array_valores_numpy, suma_total)
 
 
 if __name__ == "__main__":
