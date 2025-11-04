@@ -18,7 +18,7 @@ class Duration:
         self.__horas = horas
         self.__minutos = minutos
         self.__segundos = segundos
-        self.ajustar_horas()
+        self._ajustar_horas()
 
     # :02d significa: 0 → rellenar con ceros, 2 → el ancho total debe ser de 2 caracteres, d → es un número entero (“decimal”)
     def __str__(self):
@@ -28,29 +28,29 @@ class Duration:
         return Duration(self.__horas + other.__horas, self.__minutos + other.__minutos, self.__segundos + other.__segundos)
     
     def __sub__(self, other):
-        nueva_hora_segundos = self.total_segundos() - other.total_segundos()
+        nueva_hora_segundos = self._total_segundos() - other._total_segundos()
         return Duration(segundos=abs(nueva_hora_segundos))
 
     def __gt__(self, other):
-        return self.total_segundos() > other.total_segundos()
+        return self._total_segundos() > other._total_segundos()
     
     def __ge__(self, other):
-        return self.total_segundos() >= other.total_segundos()
+        return self._total_segundos() >= other._total_segundos()
     
     def __lt__(self, other):
-        return self.total_segundos() < other.total_segundos()
+        return self._total_segundos() < other._total_segundos()
     
     def __le__(self, other):
-        return self.total_segundos() <= other.total_segundos()
+        return self._total_segundos() <= other._total_segundos()
     
     def __eq__(self, other):
-        return self.total_segundos() == other.total_segundos()
+        return self._total_segundos() == other._total_segundos()
 
     def anadir_segundos(self, segundos_a_anadir):
         self.__segundos += segundos_a_anadir
-        self.ajustar_horas()
+        self._ajustar_horas()
 
-    def ajustar_horas(self):
+    def _ajustar_horas(self):
         minutos_sobrantes = self.__segundos // 60
 
         if minutos_sobrantes:
@@ -65,7 +65,7 @@ class Duration:
         if self.__horas > 23:
             self.__horas = self.__horas % 24
 
-    def total_segundos(self):
+    def _total_segundos(self):
         return self.__horas * 3600 + self.__minutos * 60 + self.__segundos
 
 
