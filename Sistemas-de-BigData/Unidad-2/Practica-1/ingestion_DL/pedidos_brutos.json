@@ -1,0 +1,32 @@
+[
+     {
+          "id_pedido": 1,
+          "cliente": "Carmen",
+          "importe": 38.33,
+          "timestamp": "2025-11-05T19:09:41.042374"
+     },
+     {
+          "id_pedido": 2,
+          "cliente": "Juana",
+          "importe": 152.93,
+          "timestamp": "2025-11-05T19:09:41.543086"
+     },
+     {
+          "id_pedido": 3,
+          "cliente": "Rosa",
+          "importe": 64.66,
+          "timestamp": "2025-11-05T19:09:42.043654"
+     },
+     {
+          "id_pedido": 4,
+          "cliente": "Juana",
+          "importe": 155.93,
+          "timestamp": "2025-11-05T19:09:42.544452"
+     },
+     {
+          "id_pedido": 5,
+          "cliente": "Rosa",
+          "importe": 191.7,
+          "timestamp": "2025-11-05T19:09:43.044984"
+     }
+]
