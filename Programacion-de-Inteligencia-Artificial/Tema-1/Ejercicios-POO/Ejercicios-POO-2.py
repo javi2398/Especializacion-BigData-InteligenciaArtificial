@@ -12,18 +12,22 @@
 # Ojo!!! esto se puede hacer 1 < 1/2
 
 import math
+from typeguard import typechecked
 
+@typechecked
 class Fraction:
 
-    def __init__(self, numerador, denominador):
-        if denominador > 0:
-            self.__numerador = numerador
-            self.__denominador = denominador
-            self._simplificar()
+    def __init__(self, numerador: int = 1, denominador: int = 1):
+        if denominador == 0:
+            raise ZeroDivisionError('Denominator cannot be zero.')
+
+        self.__numerador = numerador
+        self.__denominador = denominador
+        self._simplificar()
 
 
     def __str__(self):
-        return str(f'{self.__numerador:02d}/{self.__denominador:02d}')
+        return str(f'{self.__numerador}/{self.__denominador}')
     
     def _simplificar(self):
         maximo_comun_divisor = math.gcd(self.__numerador, self.__denominador)
@@ -43,57 +47,57 @@ class Fraction:
             return Fraction(other, 1)
     
     def __add__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return Fraction(numerador=(self.__numerador * other.__denominador + self.__denominador * other.__numerador), denominador=(self.__denominador * other.__denominador))
 
     def __radd__(self, other):
         return self.__add__(other)
     
     def __sub__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return Fraction(numerador=(self.__numerador * other.__denominador - self.__denominador * other.__numerador), denominador=(self.__denominador * other.__denominador))
     
     def __rsub__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return other - self
     
     def __mul__(self, other):
-        other = self._conversor_fraccion(other)
-        return Fraction(numerador=(self.__numerador * other.__denominador), denominador=(self.__denominador * other.__denominador))
-    
+        other = Fraction._conversor_fraccion(other)
+        return Fraction(numerador = self.__numerador * other.__numerador, denominador = self.__denominador * other.__denominador)
+
     def __rmul__(self, other):
-        return self.__mul__(other)
+        return Fraction.__mul__(other)
     
     def __rtruediv__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return other / self
 
     def __truediv__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return Fraction(numerador=(self.__numerador * other.__denominador), denominador=(self.__denominador * other.__numerador))
 
     def __gt__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() > other._calcular_valor()
     
     def __ge__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() >= other._calcular_valor()
     
     def __lt__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() < other._calcular_valor()
     
     def __le__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() <= other._calcular_valor()
     
     def __eq__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() == other._calcular_valor()
     
     def __ne__(self, other):
-        other = self._conversor_fraccion(other)
+        other = Fraction._conversor_fraccion(other)
         return self._calcular_valor() != other._calcular_valor()
 
 
